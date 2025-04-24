@@ -1,15 +1,21 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const cors = require('cors');
 const quotesRouter = require('./routes/quotes');
 
 const app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use('/api/quotes', quotesRouter);  
-
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+
+app.use(cors());
+app.use(express.json());
+
+// Base route for testing
+app.get('/', (req, res) => {
+  res.json({ message: 'API is working' });
+});
+
+// Mount the quotes router with the correct path
+app.use('/api/quote', quotesRouter);
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
 });
