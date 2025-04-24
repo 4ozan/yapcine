@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getRandomQuote } = require('../controllers/quoteController');
+const { getRandomQuote } = require('../controllers/quoteController.js');
 
 router.get('/randomQuotes', getRandomQuote);
 
