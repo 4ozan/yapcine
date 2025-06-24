@@ -5,7 +5,8 @@ import fs from 'fs';
 let quotes: string[] = [];
 
 try {
-  const quotesPath = path.resolve(__dirname, '../data/quotes.json');
+  // Use project root so it works in both dev (ts-node) and prod (compiled JS)
+  const quotesPath = path.resolve(process.cwd(), 'data', 'quotes.json');
   const raw = fs.readFileSync(quotesPath, 'utf-8');
   quotes = JSON.parse(raw);
   console.log('Quotes loaded successfully');
